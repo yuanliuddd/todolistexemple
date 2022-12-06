@@ -6,10 +6,12 @@ interface IProps {
 }
 
 export default function List({ people }: IProps) {
-  
+
   const peopleList = people.map((ppl) => (
-    <li>
-      <img src={ppl.img} alt="" />
+    <li key={ppl.name}>
+      <img src={ppl.img} alt="" style={{width:'12rem'}} />
+      <p>{ppl.name}</p>
+      <p>{ppl.age}</p>
     </li>
   ));
 

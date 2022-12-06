@@ -26,7 +26,7 @@ function App() {
       img: "",
     },
   ]);
-
+  
   return (
     <div className="App">
       <h1>Guest List To Party</h1>

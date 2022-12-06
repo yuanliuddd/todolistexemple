@@ -9,25 +9,65 @@ interface IAddGuest {
 export default function AddGuest({ setPeople, people }: IAddGuest) {
   const [input, setInput] = useState({
     name: "",
-    age: 0,
-    note: "",
+    age: "",
     img: "",
+    note: "",
   });
 
-  const onSubmitHandler = (): void => {
-    setPeople(input);
+
+  const onSubmitHandler = (e: React.SyntheticEvent): void => {
+    e.preventDefault();
+    setPeople([
+      ...people,
+      {
+        name: input.name,
+        age: Number(input.age),
+        img: input.img,
+        note: input.note,
+      },
+    ]);
+    setInput({
+      name: "",
+      age: "",
+      img: "",
+      note: "",
+    });
   };
 
-  const onChangeHandler = (): void => {};
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setInput((prevState) => { return { ...prevState, [e.target.placeholder]: e.target.value } }); 
+
+    
+  };
 
   return (
     <div>
       <form onSubmit={onSubmitHandler}>
-        <input type="text" />
-        <input type="text" />
-        <input type="text" />
-        <input type="text" />
-        <button type="submit"></button>
+        <input
+          type="text"
+          onChange={onChangeHandler}
+          placeholder="name"
+          value={input.name}
+        />
+        <input
+          type="text"
+          onChange={onChangeHandler}
+          placeholder="age"
+          value={input.age}
+        />
+        <input
+          type="text"
+          onChange={onChangeHandler}
+          placeholder="img"
+          value={input.img}
+        />
+        <input
+          type="text"
+          onChange={onChangeHandler}
+          placeholder="note"
+          value={input.note}
+        />
+        <button type="submit">Add Guest </button>
       </form>
     </div>
   );
